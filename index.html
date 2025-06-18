@@ -15,21 +15,21 @@
     nav ul li a { color:#fff; text-decoration:none; padding:10px; font-weight:500; }
     nav ul li a:hover { background:#004080; border-radius:5px; }
     /* الهيرو */
-    .hero {
-      background: url('./banner.jpg') center center no-repeat;
-      background-size: cover;
-      height: 200px;         /* ارتفاع مصحح */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero h1 { color:#fff; font-size:2rem; margin-bottom:8px; text-shadow:1px 1px 4px rgba(0,0,0,0.5); }
-    .hero p  { color:#e0e0e0; font-size:1rem; margin-bottom:12px; }
-    .hero .btn {
-      background:#ffcc00; color:#004080;
-      padding:8px 16px; font-size:0.9rem;
-      text-decoration:none; font-weight:bold; border-radius:50px;
+   <section class="hero" style="
+  background: url('./banner.jpg') center center no-repeat;
+  background-size: cover;
+  height: 200px;            /* أصبح 200px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+">
+  <h1>أهلاً بك في متجر المعرفة</h1>
+  <p>اكتشف أفضل المنتجات الرقمية لتطوير مهاراتك ومشاريعك</p>
+  <a class="btn" href="products.html">تسوق الآن</a>
+</section>
+
     }
     /* القسم المميز */
     .section { max-width:1200px; margin:40px auto; padding:0 20px; }
