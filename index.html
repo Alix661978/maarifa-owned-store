@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,34 +5,42 @@
   <title>متجر المعرفة للمنتجات الرقمية</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; }
-    header { background: #004080; padding: 20px; }
-    header .logo { font-size: 1.8rem; font-weight: bold; color: #fff; text-align: center; }
-    nav { background: #0059b3; }
-    nav ul { display: flex; justify-content: center; list-style: none; }
-    nav ul li { margin: 0 15px; }
-    nav ul li a { color: #fff; text-decoration: none; font-weight: 500; padding: 10px; }
-    nav ul li a:hover { background: #004080; border-radius: 5px; }
-    .hero { background: url('https://i.imgur.com/LJg7Xkp.jpg') center/cover no-repeat; padding: 100px 20px; text-align: center; }
-    .hero h1 { color: #fff; font-size: 2.5rem; margin-bottom: 10px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
-    .hero p { color: #e0e0e0; font-size: 1.1rem; margin-bottom: 20px; }
-    .hero .btn { background: #ffcc00; color: #004080; padding: 12px 30px; text-decoration: none; font-weight: bold; border-radius: 50px; }
-    .section { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-    .section h2 { font-size: 1.8rem; color: #004080; margin-bottom: 20px; text-align: center; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .card { background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.2s; }
-    .card img { width: 100%; height: 180px; object-fit: cover; }
-    .card-content { padding: 15px; }
-    .card-content h3 { color: #004080; margin-bottom: 10px; font-size: 1.2rem; }
-    .card-content p { font-size: 0.9rem; margin-bottom: 15px; }
-    .card-content .price { color: #ff6600; font-weight: bold; font-size: 1rem; }
-    .card-content .btn { display: inline-block; margin-top: 10px; background: #004080; color: #fff; padding: 8px 20px; text-decoration: none; border-radius: 5px; }
-    .card:hover { transform: translateY(-5px); }
-    footer { background: #004080; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
-    footer p { font-size: 0.9rem; }
-    .whatsapp-floating { position: fixed; bottom: 20px; left: 20px; background: #25D366; color: #fff; padding: 15px; border-radius: 50%; text-decoration: none; font-size: 1.5rem; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background:#f5f7fa; color:#333; }
+    header { background:#004080; padding:20px; }
+    header .logo { text-align:center; color:#fff; font-size:1.8rem; font-weight:bold; }
+    nav { background:#0059b3; }
+    nav ul { display:flex; justify-content:center; list-style:none; }
+    nav ul li { margin:0 15px; }
+    nav ul li a { color:#fff; text-decoration:none; padding:10px; font-weight:500; }
+    nav ul li a:hover { background:#004080; border-radius:5px; }
+    .hero {
+      background:url('banner.jpg') center/cover no-repeat;
+      padding:100px 20px; text-align:center;
+    }
+    .hero h1 { color:#fff; font-size:2.5rem; margin-bottom:10px;
+                text-shadow:1px 1px 4px rgba(0,0,0,0.5); }
+    .hero p { color:#e0e0e0; font-size:1.1rem; margin-bottom:20px; }
+    .hero .btn { background:#ffcc00; color:#004080; padding:12px 30px;
+                  text-decoration:none; font-weight:bold; border-radius:50px; }
+    .section { max-width:1200px; margin:60px auto; padding:0 20px; }
+    .section h2 { text-align:center; color:#004080; font-size:1.8rem; margin-bottom:20px; }
+    .products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .card { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);
+            overflow:hidden; transition:transform 0.2s; }
+    .card img { width:100%; height:180px; object-fit:cover; }
+    .card-content { padding:15px; text-align:right; }
+    .card-content h3 { color:#004080; margin-bottom:10px; font-size:1.2rem; }
+    .card-content p { font-size:0.9rem; margin-bottom:15px; }
+    .card-content .price { color:#ff6600; font-weight:bold; font-size:1rem; }
+    .card-content .btn { display:inline-block; margin-top:10px; background:#004080;
+                          color:#fff; padding:8px 20px; text-decoration:none; border-radius:5px; }
+    .card:hover { transform:translateY(-5px); }
+    footer { background:#004080; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+    footer p { font-size:0.9rem; }
+    .whatsapp-floating { position:fixed; bottom:20px; left:20px; background:#25D366;
+                         color:#fff; padding:15px; border-radius:50%; text-decoration:none;
+                         font-size:1.5rem; }
   </style>
 </head>
 <body>
@@ -44,7 +51,7 @@
 
 <nav>
   <ul>
-    <li><a href="#">الرئيسية</a></li>
+    <li><a href="index.html">الرئيسية</a></li>
     <li><a href="products.html">المنتجات</a></li>
     <li><a href="about.html">من نحن</a></li>
     <li><a href="contact.html">تواصل معنا</a></li>
@@ -70,7 +77,6 @@
         <a class="btn" href="products.html#cv">عرض المنتج</a>
       </div>
     </div>
-    <!-- بطاقة منتج أخرى كمثال -->
     <div class="card">
       <img src="icons-pack.png" alt="مجموعة أيقونات">
       <div class="card-content">
