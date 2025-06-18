@@ -15,14 +15,27 @@
     nav ul li a { color:#fff; text-decoration:none; padding:10px; font-weight:500; }
     nav ul li a:hover { background:#004080; border-radius:5px; }
     .hero {
-      background:url('banner.jpg') center/cover no-repeat;
-      padding:100px 20px; text-align:center;
-    }
-    .hero h1 { color:#fff; font-size:2.5rem; margin-bottom:10px;
-                text-shadow:1px 1px 4px rgba(0,0,0,0.5); }
-    .hero p { color:#e0e0e0; font-size:1.1rem; margin-bottom:20px; }
-    .hero .btn { background:#ffcc00; color:#004080; padding:12px 30px;
-                  text-decoration:none; font-weight:bold; border-radius:50px; }
+  background: url('./banner.jpg') center center no-repeat;
+  background-size: cover;
+  height: 300px;             /* يمكنك تغيير القيمة بحسب ما يناسبك */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;                /* إزالة أي حشوات زائدة */
+}
+.hero h1 {
+  font-size: 2rem;           /* تصغير حجم النص ليتناسب مع الارتفاع */
+  margin: 0 0 8px;
+}
+.hero p {
+  font-size: 1rem;
+  margin: 0 0 12px;
+}
+.hero .btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
     .section { max-width:1200px; margin:60px auto; padding:0 20px; }
     .section h2 { text-align:center; color:#004080; font-size:1.8rem; margin-bottom:20px; }
     .products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
