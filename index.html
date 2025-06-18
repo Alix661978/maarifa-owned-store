@@ -8,64 +8,64 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family: 'Segoe UI', sans-serif; background:#f5f7fa; color:#333; }
     header { background:#004080; padding:20px; }
-    header .logo { text-align:center; color:#fff; font-size:1.8rem; font-weight:bold; }
+    .logo { text-align:center; color:#fff; font-size:1.8rem; font-weight:bold; }
     nav { background:#0059b3; }
     nav ul { display:flex; justify-content:center; list-style:none; }
     nav ul li { margin:0 15px; }
     nav ul li a { color:#fff; text-decoration:none; padding:10px; font-weight:500; }
     nav ul li a:hover { background:#004080; border-radius:5px; }
+    /* الهيرو */
     .hero {
       background: url('./banner.jpg') center center no-repeat;
       background-size: cover;
-      height: 300px;               /* ارتفاع البانر مضبوط */
+      height: 300px;         /* ارتفاع مصحح */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0;                  /* إزالة أي padding إضافي */
     }
-    .hero h1 {
-      color: #fff;
-      font-size: 2rem;             /* حجم العنوان */
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-    .hero p {
-      color: #e0e0e0;
-      font-size: 1rem;             /* حجم الفقرة */
-      margin-bottom: 12px;
-    }
+    .hero h1 { color:#fff; font-size:2rem; margin-bottom:8px; text-shadow:1px 1px 4px rgba(0,0,0,0.5); }
+    .hero p  { color:#e0e0e0; font-size:1rem; margin-bottom:12px; }
     .hero .btn {
-      background: #ffcc00;
-      color: #004080;
-      padding: 8px 16px;           /* تصغير البُعد الداخلي */
-      font-size: 0.9rem;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 50px;
+      background:#ffcc00; color:#004080;
+      padding:8px 16px; font-size:0.9rem;
+      text-decoration:none; font-weight:bold; border-radius:50px;
     }
-    .section { max-width:1200px; margin:60px auto; padding:0 20px; }
-    .section h2 { text-align:center; color:#004080; font-size:1.8rem; margin-bottom:20px; }
-    .products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
-    .card { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; transition:transform .2s; }
-    .card img { width:100%; height:180px; object-fit:cover; }
+    /* القسم المميز */
+    .section { max-width:1200px; margin:40px auto; padding:0 20px; }
+    .section h2 { text-align:center; color:#004080; font-size:1.6rem; margin-bottom:20px; }
+    .products-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+    .card {
+      background:#fff; border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      overflow:hidden; transition:transform .2s;
+    }
+    .card img { width:100%; height:160px; object-fit:cover; }
     .card-content { padding:15px; text-align:right; }
-    .card-content h3 { color:#004080; margin-bottom:10px; font-size:1.2rem; }
-    .card-content p { font-size:.9rem; margin-bottom:15px; }
-    .card-content .price { color:#ff6600; font-weight:bold; font-size:1rem; }
-    .card-content .btn { display:inline-block; margin-top:10px; background:#004080; color:#fff; padding:8px 20px; text-decoration:none; border-radius:5px; }
+    .card-content h3 { color:#004080; margin-bottom:10px; font-size:1.1rem; }
+    .card-content p  { font-size:0.9rem; margin-bottom:10px; color:#555; }
+    .price { color:#ff6600; font-weight:bold; margin-bottom:10px; }
+    .card-content .btn {
+      display:inline-block; background:#004080; color:#fff;
+      padding:8px 20px; text-decoration:none; border-radius:5px;
+    }
     .card:hover { transform:translateY(-5px); }
-    footer { background:#004080; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer p { font-size:.9rem; }
-    .whatsapp-floating { position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff; padding:15px; border-radius:50%; text-decoration:none; font-size:1.5rem; }
+    footer {
+      background:#004080; color:#fff; text-align:center; padding:20px; margin-top:40px;
+    }
+    .whatsapp-floating {
+      position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff;
+      padding:15px; border-radius:50%; text-decoration:none; font-size:1.5rem;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">متجر المعرفة للمنتجات الرقمية</div>
-</header>
-
+<header><div class="logo">متجر المعرفة للمنتجات الرقمية</div></header>
 <nav>
   <ul>
     <li><a href="index.html">الرئيسية</a></li>
@@ -76,14 +76,17 @@
   </ul>
 </nav>
 
-<section class="hero" style="background:url('./banner.jpg') center center no‐repeat; background‐size:cover; height:300px; display:flex; align‐items:center; justify‐content:center; padding:0;">
-
+<section class="hero">
+  <h1>أهلاً بك في متجر المعرفة</h1>
+  <p>اكتشف أفضل المنتجات الرقمية لتطوير مهاراتك ومشاريعك</p>
+  <a class="btn" href="products.html">تسوق الآن</a>
+</section>
 
 <section class="section">
   <h2>منتجات مميزة</h2>
   <div class="products-grid">
     <div class="card">
-      <img src="cv-preview.png" alt="نماذج سيرة ذاتية">
+      <img src="cv-preview.png" alt="سير ذاتية">
       <div class="card-content">
         <h3>نموذج سيرة ذاتية احترافي</h3>
         <p>قالب Word جاهز للتعديل</p>
@@ -92,10 +95,10 @@
       </div>
     </div>
     <div class="card">
-      <img src="icons-pack.png" alt="مجموعة أيقونات">
+      <img src="icons-pack.png" alt="أيقونات">
       <div class="card-content">
         <h3>مجموعة أيقونات</h3>
-        <p>أكثر من 100 أيقونة جاهزة للاستخدام</p>
+        <p>أكثر من 100 أيقونة جاهزة</p>
         <div class="price">10 ر.س</div>
         <a class="btn" href="products.html#icons">عرض المنتج</a>
       </div>
@@ -103,11 +106,8 @@
   </div>
 </section>
 
-<footer>
-  <p>© 2025 متجر المعرفة. جميع الحقوق محفوظة.</p>
-</footer>
-
-<a href="https://wa.me/966500000000" class="whatsapp-floating" target="_blank">💬</a>
+<footer><p>© 2025 متجر المعرفة. جميع الحقوق محفوظة.</p></footer>
+<a href="https://wa.me/966500000000" class="whatsapp-floating">💬</a>
 
 </body>
 </html>
