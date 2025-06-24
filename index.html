@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>متجر المعرفة للمنتجات الرقمية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background:#f5f7fa; color:#333; }
+    header { background:#004080; padding:20px; }
+    .logo { text-align:center; color:#fff; font-size:1.8rem; font-weight:bold; }
+    nav { background:#0059b3; }
+    nav ul { display:flex; justify-content:center; list-style:none; padding:10px 0; }
+    nav ul li { margin:0 15px; }
+    nav ul li a { color:#fff; text-decoration:none; padding:10px; font-weight:500; }
+    nav ul li a:hover { background:#004080; border-radius:5px; }
+    .hero {
+      background: url('banner.jpg') center center / cover no-repeat;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .section { max-width:1200px; margin:40px auto; padding:0 20px; }
+    .section h2 { text-align:center; color:#004080; font-size:1.6rem; margin-bottom:20px; }
+    .products-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+    .card {
+      background:#fff; border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      overflow:hidden; transition:transform .2s;
+    }
+    .card img { width:100%; height:160px; object-fit:cover; }
+    .card-content { padding:15px; text-align:right; }
+    .card-content h3 { color:#004080; margin-bottom:10px; font-size:1.1rem; }
+    .card-content p  { font-size:0.9rem; margin-bottom:10px; color:#555; }
+    .price { color:#ff6600; font-weight:bold; margin-bottom:10px; }
+    .card-content .btn {
+      display:inline-block; background:#004080; color:#fff;
+      padding:8px 20px; text-decoration:none; border-radius:5px;
+    }
+    .card:hover { transform:translateY(-5px); }
+    footer {
+      background:#004080; color:#fff; text-align:center; padding:20px; margin-top:40px;
+    }
+    .whatsapp-floating {
+      position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff;
+      padding:15px; border-radius:50%; text-decoration:none; font-size:1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">متجر المعرفة للمنتجات الرقمية</div>
+</header>
+
+<!-- ✅ شريط التنقل -->
+<nav>
+  <ul>
+    <li><a href="#">الرئيسية</a></li>
+    <li><a href="#products">المنتجات</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#contact">اتصل بنا</a></li>
+  </ul>
+</nav>
+
+<!-- ✅ البانر -->
+<section class="hero"></section>
+
+<!-- ✅ قسم المنتجات -->
+<section id="products" class="section">
+  <h2>المنتجات</h2>
+  <div class="products-grid">
+    <!-- بطاقات المنتجات تضاف هنا -->
+  </div>
+</section>
+
+<!-- ✅ قسم من نحن -->
+<section id="about" class="section">
+  <h2>من نحن</h2>
+  <p style="text-align:center">متجر المعرفة متخصص في بيع المنتجات الرقمية الاحترافية.</p>
+</section>
+
+<!-- ✅ قسم اتصل بنا -->
+<section id="contact" class="section">
+  <h2>اتصل بنا</h2>
+  <p style="text-align:center">راسلنا عبر واتساب أو البريد الإلكتروني للاستفسارات وطلبات الشراء.</p>
+</section>
+
+<footer>
+  جميع الحقوق محفوظة © 2025 متجر المعرفة
+</footer>
+
+<a class="whatsapp-floating" href="https://wa.me/966XXXXXXXXX" target="_blank">💬</a>
+
+</body>
+</html>
