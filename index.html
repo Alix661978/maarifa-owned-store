@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>متجر المعرفة للمنتجات الرقمية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+    header { background: #004080; padding: 20px; }
+    .logo { text-align: center; color: #fff; font-size: 1.8rem; font-weight: bold; }
+
+    nav { background: #0059b3; }
+    nav ul { display: flex; justify-content: center; list-style: none; flex-wrap: wrap; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a { color: #fff; text-decoration: none; padding: 10px; display: inline-block; font-weight: 500; }
+    nav ul li a:hover { background: #004080; border-radius: 5px; }
+
+    .section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .section h2 { text-align: center; color: #004080; font-size: 1.6rem; margin-bottom: 20px; }
+
+    .hidden { display: none; }
+
+    footer {
+      background: #004080;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">متجر المعرفة للمنتجات الرقمية</div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('home')">الرئيسية</a></li>
+      <li><a href="#" onclick="showSection('products')">المنتجات</a></li>
+      <li><a href="#" onclick="showSection('about')">من نحن</a></li>
+      <li><a href="#" onclick="showSection('contact')">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="section"> <!-- الرئيسية -->
+    <h2>مرحبًا بك في متجر المعرفة</h2>
+    <p>متجر رقمي لبيع المنتجات الرقمية الاحترافية.</p>
+  </section>
+
+  <section id="products" class="section hidden"> <!-- المنتجات -->
+    <h2>المنتجات</h2>
+    <p>سيتم عرض المنتجات هنا قريبًا.</p>
+  </section>
+
+  <section id="about" class="section hidden"> <!-- من نحن -->
+    <h2>من نحن – متجر المعرفة للمنتجات الرقمية</h2>
+    <p>
+    نحن في متجر المعرفة لا نبيع منتجات رقمية فحسب، بل نقدم أدوات تصنع الفرق في حياة كل باحث عن التميز والإبداع.<br><br>
+    نفخر بأننا منصة سعودية متخصصة في تقديم منتجات رقمية احترافية، تساعدك على تطوير مهاراتك، وتحقيق أهدافك، سواء كنت مصممًا، أو باحثًا عن وظيفة، أو رائد أعمال في بداية الطريق.<br><br>
+    منتجاتنا تشمل:<br>
+    - قوالب سيرة ذاتية أنيقة وسهلة التعديل<br>
+    - مجموعات أيقونات وتصاميم عالية الجودة<br>
+    - ملفات وأدلة تعليمية قابلة للتنزيل الفوري<br><br>
+    كل منتج نعرضه هو ثمرة فهم عميق لاحتياجات المستخدم العربي، ورغبة صادقة في نشر المعرفة الرقمية بجودة وسعر مناسب.<br><br>
+    في متجر المعرفة، نؤمن أن المستقبل رقمي... ونمنحك مفاتيحه.
+    </p>
+  </section>
+
+  <section id="contact" class="section hidden"> <!-- اتصل بنا -->
+    <h2>اتصل بنا</h2>
+    <p>للتواصل معنا يرجى استخدام أي من وسائل الاتصال المدرجة في أسفل الصفحة أو عبر واتساب.</p>
+  </section>
+
+  <footer>
+    جميع الحقوق محفوظة © متجر المعرفة 2025
+  </footer>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
