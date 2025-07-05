@@ -115,10 +115,10 @@
                 </div>
             </h1>
             <nav id="main-nav" class="hidden md:flex space-x-8 space-x-reverse text-lg">
-                <a href="#" onclick="showPage('home', this)" class="nav-link active hover:text-amber-400 transition-colors">الرئيسية</a>
-                <a href="#" onclick="showPage('products', this)" class="nav-link hover:text-amber-400 transition-colors">المنتجات</a>
-                <a href="#" onclick="showPage('about', this)" class="nav-link hover:text-amber-400 transition-colors">حولنا</a>
-                <a href="#" onclick="showPage('contact', this)" class="nav-link hover:text-amber-400 transition-colors">اتصل بنا</a>
+                <a href="#" data-page="home" class="nav-link active hover:text-amber-400 transition-colors">الرئيسية</a>
+                <a href="#" data-page="products" class="nav-link hover:text-amber-400 transition-colors">المنتجات</a>
+                <a href="#" data-page="about" class="nav-link hover:text-amber-400 transition-colors">حولنا</a>
+                <a href="#" data-page="contact" class="nav-link hover:text-amber-400 transition-colors">اتصل بنا</a>
             </nav>
             <div class="flex items-center">
                 <button id="cart-button" class="ml-4 relative">
@@ -143,7 +143,7 @@
                 <div class="container mx-auto px-6 py-24 md:py-32 text-center">
                     <h2 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">بوابتك إلى عالم من الإلهام</h2>
                     <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">منتجات فريدة تشعل فضولك وتضيء أفكارك.</p>
-                    <a href="#" onclick="showPage('products', document.querySelector('a[onclick*=\'products\']'))" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg">تصفح المنتجات</a>
+                    <a href="#" id="browse-products-btn" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg">تصفح المنتجات</a>
                 </div>
             </section>
             <section class="py-16 bg-0c1427">
@@ -170,7 +170,7 @@
                     <p class="col-span-full text-center text-lg">جاري تحميل المنتجات...</p>
                 </div>
                 <div class="text-center mt-16">
-                    <button onclick="showPage('home', document.querySelector('a[onclick*=\'home\']'))" class="btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
+                    <button data-page="home" class="back-to-home-btn btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
                         العودة للصفحة الرئيسية
                     </button>
                 </div>
@@ -185,7 +185,7 @@
                     نؤمن في "متجر المعرفة" بأن الفضول هو شرارة الإبداع. كل منتج في متجرنا مصمم ليكون أكثر من مجرد غرض، بل هو أداة لإثارة التساؤل، وتشجيع التعلم، والاحتفاء برحلة الاكتشاف الفكري. من الفن الذي يجسد الحكمة إلى الأدوات التي تنظم أفكارك، نحن هنا لنرافقك في مسيرتك نحو الارتقاء.
                 </p>
                 <div class="text-center mt-12">
-                    <button onclick="showPage('home', document.querySelector('a[onclick*=\'home\']'))" class="btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
+                     <button data-page="home" class="back-to-home-btn btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
                         العودة للصفحة الرئيسية
                     </button>
                 </div>
@@ -217,7 +217,7 @@
                     </a>
                 </div>
                 <div class="text-center mt-16">
-                    <button onclick="showPage('home', document.querySelector('a[onclick*=\'home\']'))" class="btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
+                    <button data-page="home" class="back-to-home-btn btn-secondary font-bold py-3 px-8 rounded-lg text-lg">
                         العودة للصفحة الرئيسية
                     </button>
                 </div>
@@ -229,7 +229,6 @@
             <div class="container mx-auto px-6">
                 <h3 class="text-4xl font-bold text-center mb-12">إتمام عملية الشراء</h3>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <!-- Customer Info Form -->
                     <div class="lg:col-span-2 bg-gray-900/30 p-8 rounded-lg">
                         <h4 class="text-2xl font-bold mb-6">معلومات العميل</h4>
                         <form id="checkout-form">
@@ -253,12 +252,9 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Order Summary -->
                     <div class="bg-gray-900/30 p-8 rounded-lg">
                         <h4 class="text-2xl font-bold mb-6">ملخص الطلب</h4>
-                        <div id="checkout-summary" class="space-y-3 mb-6">
-                            <!-- Checkout summary items will be injected here -->
-                        </div>
+                        <div id="checkout-summary" class="space-y-3 mb-6"></div>
                         <div class="border-t border-gray-700 pt-4 space-y-2">
                             <div class="flex justify-between">
                                 <span>المجموع الفرعي</span>
@@ -270,7 +266,7 @@
                             </div>
                         </div>
                         <button type="submit" form="checkout-form" class="w-full btn-primary font-bold py-3 px-8 rounded-lg text-lg mt-6">تأكيد الطلب</button>
-                        <button onclick="showPage('products', document.querySelector('a[onclick*=\'products\']'))" class="w-full text-center mt-4 text-gray-400 hover:text-white">
+                        <button data-page="products" class="back-to-products-btn w-full text-center mt-4 text-gray-400 hover:text-white">
                             العودة للمنتجات
                         </button>
                     </div>
@@ -287,9 +283,7 @@
                 <h3 class="text-3xl font-bold">سلة المشتريات</h3>
                 <button id="close-cart-button" class="text-3xl font-bold hover:text-red-500">&times;</button>
             </div>
-            <div id="cart-items-container" class="space-y-4 mb-6 max-h-64 overflow-y-auto">
-                <!-- Cart items will be injected here -->
-            </div>
+            <div id="cart-items-container" class="space-y-4 mb-6 max-h-64 overflow-y-auto"></div>
             <div class="border-t border-gray-600 pt-4">
                 <div class="flex justify-between items-center text-xl font-bold">
                     <span>الإجمالي:</span>
@@ -359,7 +353,9 @@
 
         function showPage(pageId, element) {
             document.querySelectorAll('.page-content').forEach(page => page.style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
+            const selectedPage = document.getElementById(pageId);
+            if(selectedPage) selectedPage.style.display = 'block';
+            
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             if (element) element.classList.add('active');
         }
@@ -465,14 +461,36 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const homeLink = document.querySelector('a[onclick*=\'home\']');
-            showPage('home', homeLink);
-
             const swiper = new Swiper('.swiper-container', {
                 loop: true,
                 autoplay: { delay: 3000, disableOnInteraction: false },
                 effect: 'fade',
                 fadeEffect: { crossFade: true },
+            });
+
+            // Navigation Logic
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(link.dataset.page, link);
+                });
+            });
+
+            document.getElementById('browse-products-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('products', document.querySelector('a[data-page="products"]'));
+            });
+
+            document.querySelectorAll('.back-to-home-btn').forEach(button => {
+                 button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage('home', document.querySelector('a[data-page="home"]'));
+                });
+            });
+             document.querySelector('.back-to-products-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('products', document.querySelector('a[data-page="products"]'));
             });
 
             onAuthStateChanged(auth, (user) => {
@@ -508,7 +526,7 @@
                 if (cart.length > 0) {
                     cartModal.style.display = 'none';
                     updateCheckoutUI();
-                    showPage('checkout');
+                    showPage('checkout', null);
                 } else {
                     alert("سلتك فارغة!");
                 }
@@ -517,12 +535,11 @@
             updateCartUI();
             _initAuth();
         });
-        
-        window.showPage = showPage;
     </script>
 
 </body>
 </html>
+
 
 
 
