@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>متجر المعرفة للمنتجات الرقمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+        header { background: #003366; color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; }
+        header img { width: 40px; height: 40px; margin-left: 10px; }
+        nav { background: #0055a5; text-align: center; padding: 10px 0; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .banner { width: 100%; height: 300px; background-image: url('https://i.imgur.com/z7oKRCt.jpg'); background-size: cover; background-position: center; }
+        .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+        .product { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; width: 220px; }
+        .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
+        .product h3 { margin: 10px 0; color: #0055a5; }
+        .product p { color: #666; font-size: 14px; }
+        .product span { display: block; margin: 10px 0; color: #ff9900; font-weight: bold; }
+        .product button { background: #ff9900; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .product button:hover { background: #e68a00; }
+        footer { background: #003366; color: white; text-align: center; padding: 15px; margin-top: 20px; }
+        footer a { color: #ffcc00; margin: 0 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/NKXK1gg.png" alt="شعار">
+        <h1>متجر المعرفة للمنتجات الرقمية</h1>
+    </header>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">اتصل بنا</a>
+    </nav>
+
+    <div class="banner"></div>
+
+    <section id="products" class="products">
+        <div class="product">
+            <img src="https://i.imgur.com/V6FGf3w.jpg" alt="دليل الرشاقة">
+            <h3>دليل الرشاقة</h3>
+            <p>دليل شامل للتغذية الصحية والرياضة.</p>
+            <span>25 ريال</span>
+            <button>شراء الآن</button>
+        </div>
+        <div class="product">
+            <img src="https://i.imgur.com/c9oNsQ1.jpg" alt="التسويق الإلكتروني">
+            <h3>دليل التسويق الإلكتروني</h3>
+            <p>كل ما تحتاجه لتسويق منتجاتك بنجاح.</p>
+            <span>30 ريال</span>
+            <button>شراء الآن</button>
+        </div>
+        <div class="product">
+            <img src="https://i.imgur.com/HdnSGBV.jpg" alt="التجارة الرقمية">
+            <h3>استراتيجيات التجارة الرقمية</h3>
+            <p>طرق فعالة لزيادة أرباحك عبر الإنترنت.</p>
+            <span>40 ريال</span>
+            <button>شراء الآن</button>
+        </div>
+        <div class="product">
+            <img src="https://i.imgur.com/wuGSRpA.jpg" alt="حزمة التصاميم">
+            <h3>حزمة تصاميم التواصل</h3>
+            <p>تصاميم جاهزة احترافية لصفحاتك.</p>
+            <span>20 ريال</span>
+            <button>شراء الآن</button>
+        </div>
+        <div class="product">
+            <img src="https://i.imgur.com/YiydD1z.jpg" alt="كورس SEO">
+            <h3>كورس تحسين محركات البحث</h3>
+            <p>تعلم تصدر نتائج البحث بسهولة.</p>
+            <span>50 ريال</span>
+            <button>شراء الآن</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2025</p>
+        <a href="#"><i class="fab fa-facebook"></i> فيسبوك</a>
+        <a href="#"><i class="fab fa-twitter"></i> تويتر</a>
+        <a href="#"><i class="fab fa-instagram"></i> انستقرام</a>
+    </footer>
+</body>
+</html>
