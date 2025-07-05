@@ -343,253 +343,278 @@
     <!-- Your App's Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Firebase Configuration
-            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            
+            // =================================================================
+            // =================== تهيئة Firebase - خطوة هامة ===================
+            // =================================================================
+            //
+            // لكي يعمل المتجر بشكل صحيح على GitHub، يجب عليك إدخال معلومات
+            // مشروع Firebase الخاص بك هنا.
+            // 1. اذهب إلى مشروعك على Firebase.
+            // 2. اذهب إلى إعدادات المشروع (Project Settings).
+            // 3. في قسم "تطبيقاتك" (Your apps)، ابحث عن كود تهيئة الويب (SDK setup and configuration).
+            // 4. انسخ كائن `firebaseConfig` والصقه هنا بدلاً من الكائن الحالي.
+            //
+            const firebaseConfig = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_AUTH_DOMAIN",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_STORAGE_BUCKET",
+                messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+            //
+            // =================================================================
+            // =================================================================
+
+            // ** NEW: Check for placeholder API Key **
+            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+                document.body.innerHTML = `
+                    <div class="h-screen w-screen bg-gray-900 flex items-center justify-center text-white text-center p-8" dir="rtl">
+                        <div>
+                            <h1 class="text-3xl font-bold text-red-500 mb-4">خطأ في الإعدادات</h1>
+                            <p class="text-xl mb-2">
+                                المتجر لا يعمل لأن مفتاح Firebase API غير صحيح.
+                            </p>
+                            <p class="mt-4 text-gray-400">
+                                يرجى اتباع التعليمات في بداية وسم <code class="bg-gray-700 p-1 rounded">&lt;script&gt;</code> في ملف HTML لاستبدال قيم <code class="bg-gray-700 p-1 rounded">firebaseConfig</code>.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return; // Stop all further execution
+            }
 
             // Initialize Firebase
-            try {
-                const app = firebase.initializeApp(firebaseConfig);
-                const db = firebase.firestore();
-                const auth = firebase.auth();
-                // ** CRITICAL FIX: Use the global firebase object for setLogLevel **
-                firebase.setLogLevel('debug');
+            const app = firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const auth = firebase.auth();
 
-                // --- DOM Elements ---
-                const productsGrid = document.getElementById('products-grid');
-                const cartButton = document.getElementById('cart-button');
-                const cartModal = document.getElementById('cart-modal');
-                const closeCartButton = document.getElementById('close-cart-button');
-                const cartItemsContainer = document.getElementById('cart-items-container');
-                const cartTotalEl = document.getElementById('cart-total');
-                const cartCounter = document.getElementById('cart-counter');
-                const checkoutButton = document.getElementById('checkout-button');
-                const checkoutSummary = document.getElementById('checkout-summary');
-                const checkoutSubtotal = document.getElementById('checkout-subtotal');
-                const checkoutTotal = document.getElementById('checkout-total');
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const mobileMenu = document.getElementById('mobile-menu');
+            // --- DOM Elements ---
+            const productsGrid = document.getElementById('products-grid');
+            const cartButton = document.getElementById('cart-button');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCartButton = document.getElementById('close-cart-button');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalEl = document.getElementById('cart-total');
+            const cartCounter = document.getElementById('cart-counter');
+            const checkoutButton = document.getElementById('checkout-button');
+            const checkoutSummary = document.getElementById('checkout-summary');
+            const checkoutSubtotal = document.getElementById('checkout-subtotal');
+            const checkoutTotal = document.getElementById('checkout-total');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-                let cart = JSON.parse(localStorage.getItem('knowledgeStoreCart')) || [];
+            let cart = JSON.parse(localStorage.getItem('knowledgeStoreCart')) || [];
 
-                // --- Page Navigation ---
-                function showPage(pageId) {
-                    if (!pageId) return;
-                    document.querySelectorAll('.page-content').forEach(page => page.style.display = 'none');
-                    const selectedPage = document.getElementById(pageId);
-                    if (selectedPage) {
-                        selectedPage.style.display = 'block';
-                    }
-
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.toggle('active', link.dataset.page === pageId);
-                    });
+            // --- Page Navigation ---
+            function showPage(pageId) {
+                if (!pageId) return;
+                document.querySelectorAll('.page-content').forEach(page => page.style.display = 'none');
+                const selectedPage = document.getElementById(pageId);
+                if (selectedPage) {
+                    selectedPage.style.display = 'block';
                 }
 
-                // --- Cart Logic ---
-                function updateCartUI() {
-                    cartItemsContainer.innerHTML = '';
-                    let total = 0;
-                    if (cart.length === 0) {
-                        cartItemsContainer.innerHTML = '<p class="text-center text-gray-400">سلتك فارغة.</p>';
-                    } else {
-                        cart.forEach(item => {
-                            total += item.price * item.quantity;
-                            const itemElement = document.createElement('div');
-                            itemElement.className = 'cart-item flex justify-between items-center py-2 border-b border-gray-700';
-                            itemElement.innerHTML = `
-                                <div class="flex items-center">
-                                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-md">
-                                    <div class="mr-4">
-                                        <h4 class="font-bold">${item.name}</h4>
-                                        <p class="text-sm text-gray-400">${item.price} ر.س</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="ml-4">x ${item.quantity}</span>
-                                    <button class="text-red-500 hover:text-red-700 text-2xl remove-from-cart" data-id="${item.id}">&times;</button>
-                                </div>
-                            `;
-                            cartItemsContainer.appendChild(itemElement);
-                        });
-                    }
-                    cartTotalEl.textContent = `${total.toFixed(2)} ر.س`;
-                    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                    cartCounter.textContent = totalItems;
-                    cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
-                }
-
-                function updateCheckoutUI() {
-                    checkoutSummary.innerHTML = '';
-                    let subtotal = 0;
-                    if (cart.length === 0) {
-                        checkoutSummary.innerHTML = '<p class="text-center text-gray-400">لا توجد منتجات في السلة لإتمام الشراء.</p>';
-                    } else {
-                        cart.forEach(item => {
-                            subtotal += item.price * item.quantity;
-                            const summaryItem = document.createElement('div');
-                            summaryItem.className = 'flex justify-between text-gray-300';
-                            summaryItem.innerHTML = `
-                                <span>${item.name} (x${item.quantity})</span>
-                                <span>${(item.price * item.quantity).toFixed(2)} ر.س</span>
-                            `;
-                            checkoutSummary.appendChild(summaryItem);
-                        });
-                    }
-                    checkoutSubtotal.textContent = `${subtotal.toFixed(2)} ر.س`;
-                    checkoutTotal.textContent = `${subtotal.toFixed(2)} ر.س`;
-                }
-
-                function addToCart(product) {
-                    const existingItem = cart.find(item => item.id === product.id);
-                    if (existingItem) {
-                        existingItem.quantity++;
-                    } else {
-                        cart.push({ ...product, quantity: 1 });
-                    }
-                    localStorage.setItem('knowledgeStoreCart', JSON.stringify(cart));
-                    updateCartUI();
-                }
-
-                function removeFromCart(productId) {
-                    cart = cart.filter(item => item.id !== productId);
-                    localStorage.setItem('knowledgeStoreCart', JSON.stringify(cart));
-                    updateCartUI();
-                }
-
-                // --- Firestore Data ---
-                function renderStoreProducts() {
-                    const productsCollectionPath = `/artifacts/${appId}/public/data/products`;
-                    db.collection(productsCollectionPath).onSnapshot(
-                        (querySnapshot) => {
-                            productsGrid.innerHTML = '';
-                            if (querySnapshot.empty) {
-                                productsGrid.innerHTML = '<p class="col-span-full text-center text-lg">لا توجد منتجات لعرضها حالياً.</p>';
-                                return;
-                            }
-                            querySnapshot.forEach((doc) => {
-                                const product = { id: doc.id, ...doc.data() };
-                                const productCard = document.createElement('div');
-                                productCard.className = 'card rounded-lg overflow-hidden shadow-lg flex flex-col';
-                                productCard.innerHTML = `
-                                    <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a2942/fbbf24?text=Image+Not+Found';">
-                                    <div class="p-6 flex flex-col flex-grow">
-                                        <h4 class="text-2xl font-bold mb-2 flex-grow">${product.name}</h4>
-                                        <p class="mb-4 text-gray-400">${product.description}</p>
-                                        <div class="flex justify-between items-center mt-auto">
-                                            <span class="text-2xl font-bold text-amber-400">${product.price} ر.س</span>
-                                            <button class="btn-secondary font-bold py-2 px-4 rounded-lg add-to-cart-btn">أضف للسلة</button>
-                                        </div>
-                                    </div>
-                                `;
-                                productCard.querySelector('.add-to-cart-btn').addEventListener('click', () => addToCart(product));
-                                productsGrid.appendChild(productCard);
-                            });
-                        },
-                        (error) => {
-                            console.error("Error fetching products: ", error);
-                            productsGrid.innerHTML = '<p class="col-span-full text-center text-lg text-red-500">حدث خطأ أثناء تحميل المنتجات.</p>';
-                        }
-                    );
-                }
-
-                // --- Event Listeners and Initializers ---
-                
-                // Initialize Lucide Icons
-                lucide.createIcons();
-
-                // Initialize Swiper
-                try {
-                    new Swiper('.swiper-container', {
-                        loop: true,
-                        autoplay: { delay: 3000, disableOnInteraction: false },
-                        effect: 'fade',
-                        fadeEffect: { crossFade: true },
-                    });
-                } catch (e) {
-                    console.error("Swiper initialization failed:", e);
-                }
-
-                // Mobile Menu Logic
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    const icon = mobileMenuButton.querySelector('i');
-                    const isHidden = mobileMenu.classList.contains('hidden');
-                    icon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
-                    lucide.createIcons(); // Re-render the new icon
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.dataset.page === pageId);
                 });
-
-                // ** ROBUST NAVIGATION LOGIC **
-                document.querySelectorAll('[data-page]').forEach(element => {
-                    element.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const pageId = element.dataset.page;
-                        showPage(pageId);
-
-                        if (element.classList.contains('nav-link-mobile')) {
-                            mobileMenu.classList.add('hidden');
-                            mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
-                            lucide.createIcons();
-                        }
-                    });
-                });
-                
-                // Cart Logic
-                cartButton.addEventListener('click', () => cartModal.style.display = 'block');
-                closeCartButton.addEventListener('click', () => cartModal.style.display = 'none');
-                window.addEventListener('click', (event) => {
-                    if (event.target == cartModal) {
-                        cartModal.style.display = 'none';
-                    }
-                });
-                cartItemsContainer.addEventListener('click', (e) => {
-                    const removeButton = e.target.closest('.remove-from-cart');
-                    if (removeButton) {
-                        removeFromCart(removeButton.dataset.id);
-                    }
-                });
-                checkoutButton.addEventListener('click', () => {
-                    if (cart.length > 0) {
-                        cartModal.style.display = 'none';
-                        updateCheckoutUI();
-                        showPage('checkout');
-                    } else {
-                        console.log("Cart is empty!");
-                    }
-                });
-
-                // Initial UI Update
-                updateCartUI();
-
-                // --- Firebase Authentication and Data Loading ---
-                async function startFirebase() {
-                    auth.onAuthStateChanged((user) => {
-                        if (user) { 
-                            console.log("User is authenticated, rendering products.");
-                            renderStoreProducts(); 
-                        }
-                    });
-
-                    try {
-                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                            await auth.signInWithCustomToken(__initial_auth_token);
-                        } else {
-                            await auth.signInAnonymously();
-                        }
-                    } catch (error) {
-                        console.error("Storefront auth failed:", error);
-                        productsGrid.innerHTML = '<p class="col-span-full text-center text-lg text-red-500">فشل الاتصال بالخادم لعرض المنتجات.</p>';
-                    }
-                }
-                
-                startFirebase();
-            
-            } catch (error) {
-                console.error("A critical error occurred during initialization:", error);
-                document.body.innerHTML = '<div style="color: white; text-align: center; padding-top: 50px; font-size: 24px;">حدث خطأ فادح. يرجى مراجعة الكونسول.</div>';
             }
+
+            // --- Cart Logic ---
+            function updateCartUI() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-center text-gray-400">سلتك فارغة.</p>';
+                } else {
+                    cart.forEach(item => {
+                        total += item.price * item.quantity;
+                        const itemElement = document.createElement('div');
+                        itemElement.className = 'cart-item flex justify-between items-center py-2 border-b border-gray-700';
+                        itemElement.innerHTML = `
+                            <div class="flex items-center">
+                                <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-md">
+                                <div class="mr-4">
+                                    <h4 class="font-bold">${item.name}</h4>
+                                    <p class="text-sm text-gray-400">${item.price} ر.س</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="ml-4">x ${item.quantity}</span>
+                                <button class="text-red-500 hover:text-red-700 text-2xl remove-from-cart" data-id="${item.id}">&times;</button>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+                    });
+                }
+                cartTotalEl.textContent = `${total.toFixed(2)} ر.س`;
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCounter.textContent = totalItems;
+                cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+
+            function updateCheckoutUI() {
+                checkoutSummary.innerHTML = '';
+                let subtotal = 0;
+                if (cart.length === 0) {
+                    checkoutSummary.innerHTML = '<p class="text-center text-gray-400">لا توجد منتجات في السلة لإتمام الشراء.</p>';
+                } else {
+                    cart.forEach(item => {
+                        subtotal += item.price * item.quantity;
+                        const summaryItem = document.createElement('div');
+                        summaryItem.className = 'flex justify-between text-gray-300';
+                        summaryItem.innerHTML = `
+                            <span>${item.name} (x${item.quantity})</span>
+                            <span>${(item.price * item.quantity).toFixed(2)} ر.س</span>
+                        `;
+                        checkoutSummary.appendChild(summaryItem);
+                    });
+                }
+                checkoutSubtotal.textContent = `${subtotal.toFixed(2)} ر.س`;
+                checkoutTotal.textContent = `${subtotal.toFixed(2)} ر.س`;
+            }
+
+            function addToCart(product) {
+                const existingItem = cart.find(item => item.id === product.id);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                localStorage.setItem('knowledgeStoreCart', JSON.stringify(cart));
+                updateCartUI();
+            }
+
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                localStorage.setItem('knowledgeStoreCart', JSON.stringify(cart));
+                updateCartUI();
+            }
+
+            // --- Firestore Data ---
+            function renderStoreProducts() {
+                const productsCollectionPath = "products"; 
+                db.collection(productsCollectionPath).onSnapshot(
+                    (querySnapshot) => {
+                        productsGrid.innerHTML = '';
+                        if (querySnapshot.empty) {
+                            productsGrid.innerHTML = '<p class="col-span-full text-center text-lg">لا توجد منتجات لعرضها حالياً. تأكد من إضافة منتجات في مجموعة "products" في قاعدة بيانات Firestore.</p>';
+                            return;
+                        }
+                        querySnapshot.forEach((doc) => {
+                            const product = { id: doc.id, ...doc.data() };
+                            const productCard = document.createElement('div');
+                            productCard.className = 'card rounded-lg overflow-hidden shadow-lg flex flex-col';
+                            productCard.innerHTML = `
+                                <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a2942/fbbf24?text=Image+Not+Found';">
+                                <div class="p-6 flex flex-col flex-grow">
+                                    <h4 class="text-2xl font-bold mb-2 flex-grow">${product.name}</h4>
+                                    <p class="mb-4 text-gray-400">${product.description}</p>
+                                    <div class="flex justify-between items-center mt-auto">
+                                        <span class="text-2xl font-bold text-amber-400">${product.price} ر.س</span>
+                                        <button class="btn-secondary font-bold py-2 px-4 rounded-lg add-to-cart-btn">أضف للسلة</button>
+                                    </div>
+                                </div>
+                            `;
+                            productCard.querySelector('.add-to-cart-btn').addEventListener('click', () => addToCart(product));
+                            productsGrid.appendChild(productCard);
+                        });
+                    },
+                    (error) => {
+                        console.error("Error fetching products: ", error);
+                        productsGrid.innerHTML = `<p class="col-span-full text-center text-lg text-red-500">حدث خطأ أثناء تحميل المنتجات. تأكد من صحة إعدادات Firebase وأن قواعد الأمان تسمح بالقراءة.</p>`;
+                    }
+                );
+            }
+
+            // --- Event Listeners and Initializers ---
+            
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Initialize Swiper
+            try {
+                new Swiper('.swiper-container', {
+                    loop: true,
+                    autoplay: { delay: 3000, disableOnInteraction: false },
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                });
+            } catch (e) {
+                console.error("Swiper initialization failed:", e);
+            }
+
+            // Mobile Menu Logic
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                const isHidden = mobileMenu.classList.contains('hidden');
+                icon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+                lucide.createIcons();
+            });
+
+            // ROBUST NAVIGATION LOGIC
+            document.querySelectorAll('[data-page]').forEach(element => {
+                element.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = element.dataset.page;
+                    showPage(pageId);
+
+                    if (element.classList.contains('nav-link-mobile')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
+                        lucide.createIcons();
+                    }
+                });
+            });
+            
+            // Cart Logic
+            cartButton.addEventListener('click', () => cartModal.style.display = 'block');
+            closeCartButton.addEventListener('click', () => cartModal.style.display = 'none');
+            window.addEventListener('click', (event) => {
+                if (event.target == cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+            cartItemsContainer.addEventListener('click', (e) => {
+                const removeButton = e.target.closest('.remove-from-cart');
+                if (removeButton) {
+                    removeFromCart(removeButton.dataset.id);
+                }
+            });
+            checkoutButton.addEventListener('click', () => {
+                if (cart.length > 0) {
+                    cartModal.style.display = 'none';
+                    updateCheckoutUI();
+                    showPage('checkout');
+                } else {
+                    console.log("Cart is empty!");
+                }
+            });
+
+            // Initial UI Update
+            updateCartUI();
+
+            // --- Firebase Authentication and Data Loading ---
+            async function startFirebase() {
+                try {
+                    await auth.signInAnonymously();
+                    const user = auth.currentUser;
+                    if (user) {
+                        console.log("User is authenticated anonymously:", user.uid);
+                        renderStoreProducts();
+                    }
+                } catch (error) {
+                    console.error("Firebase Anonymous Auth failed:", error);
+                    productsGrid.innerHTML = `<p class="col-span-full text-center text-lg text-red-500">فشل تسجيل الدخول. تأكد من تفعيل Anonymous Authentication في مشروع Firebase.</p>`;
+                }
+            }
+            
+            startFirebase();
         });
     </script>
 
 </body>
 </html>
+
