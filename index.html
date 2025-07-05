@@ -460,8 +460,9 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-             // Initialize Swiper
+        // --- Main App Initialization ---
+        function initializeAppLogic() {
+            // Initialize Swiper
             try {
                 new Swiper('.swiper-container', {
                     loop: true,
@@ -470,7 +471,7 @@
                     fadeEffect: { crossFade: true },
                 });
             } catch (e) {
-                console.error("Swiper initialization failed. Is the library loaded?", e);
+                console.error("Swiper initialization failed:", e);
             }
 
             // Navigation Logic
@@ -497,28 +498,7 @@
                 e.preventDefault();
                 showPage('products', document.querySelector('a[data-page="products"]'));
             });
-
-            // Firebase and Cart Logic
-            async function _initAuth() {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Storefront auth failed:", error);
-                    productsGrid.innerHTML = '<p class="col-span-full text-center text-lg text-red-500">فشل الاتصال بالخادم لعرض المنتجات.</p>';
-                }
-            }
             
-            onAuthStateChanged(auth, (user) => {
-                if (user) { 
-                    console.log("User is authenticated, rendering products.");
-                    renderStoreProducts(); 
-                }
-            });
-
             cartButton.addEventListener('click', () => cartModal.style.display = 'block');
             closeCartButton.addEventListener('click', () => cartModal.style.display = 'none');
             window.addEventListener('click', (event) => {
@@ -542,8 +522,33 @@
             });
 
             updateCartUI();
-            _initAuth();
-        });
+        }
+
+        // --- Firebase Authentication and Data Loading ---
+        async function start() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) { 
+                    console.log("User is authenticated, rendering products.");
+                    renderStoreProducts(); 
+                }
+            });
+
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Storefront auth failed:", error);
+                productsGrid.innerHTML = '<p class="col-span-full text-center text-lg text-red-500">فشل الاتصال بالخادم لعرض المنتجات.</p>';
+            }
+        }
+        
+        // --- Run the App ---
+        initializeAppLogic();
+        start();
+
     </script>
 
 </body>
