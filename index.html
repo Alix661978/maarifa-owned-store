@@ -461,12 +461,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const swiper = new Swiper('.swiper-container', {
-                loop: true,
-                autoplay: { delay: 3000, disableOnInteraction: false },
-                effect: 'fade',
-                fadeEffect: { crossFade: true },
-            });
+             // Initialize Swiper
+            try {
+                new Swiper('.swiper-container', {
+                    loop: true,
+                    autoplay: { delay: 3000, disableOnInteraction: false },
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                });
+            } catch (e) {
+                console.error("Swiper initialization failed. Is the library loaded?", e);
+            }
 
             // Navigation Logic
             const navLinks = document.querySelectorAll('.nav-link');
@@ -493,10 +498,7 @@
                 showPage('products', document.querySelector('a[data-page="products"]'));
             });
 
-            onAuthStateChanged(auth, (user) => {
-                if (user) { renderStoreProducts(); }
-            });
-
+            // Firebase and Cart Logic
             async function _initAuth() {
                 try {
                     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -510,6 +512,13 @@
                 }
             }
             
+            onAuthStateChanged(auth, (user) => {
+                if (user) { 
+                    console.log("User is authenticated, rendering products.");
+                    renderStoreProducts(); 
+                }
+            });
+
             cartButton.addEventListener('click', () => cartModal.style.display = 'block');
             closeCartButton.addEventListener('click', () => cartModal.style.display = 'none');
             window.addEventListener('click', (event) => {
@@ -539,6 +548,7 @@
 
 </body>
 </html>
+
 
 
 
