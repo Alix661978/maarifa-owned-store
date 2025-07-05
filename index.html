@@ -116,7 +116,7 @@
     <!-- Header -->
     <header class="bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50 relative">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" data-page="home" class="text-xl md:text-2xl font-bold text-white flex items-center nav-link">
+            <a href="#" data-page="home" class="text-xl md:text-2xl font-bold text-white flex items-center">
                 <i data-lucide="lightbulb" class="ml-3 text-amber-400"></i>
                 <div>
                     <span class="text-amber-400">متجر</span> المعرفة
@@ -351,7 +351,6 @@
             const app = firebase.initializeApp(firebaseConfig);
             const db = firebase.firestore();
             const auth = firebase.auth();
-            // Corrected: Set log level on the service namespace, not an instance
             firebase.firestore.setLogLevel('debug');
 
             // --- DOM Elements ---
@@ -515,31 +514,21 @@
                 lucide.createIcons(); // Re-render the new icon
             });
 
-            // General Navigation
-            document.body.addEventListener('click', (e) => {
-                const target = e.target.closest('[data-page]');
-                if (target) {
-                    e.preventDefault();
-                    showPage(target.dataset.page);
-                    // If it's a mobile link, close the menu
-                    if (target.classList.contains('nav-link-mobile') || target.closest('#mobile-menu')) {
+            // ** CORRECTED NAVIGATION LOGIC **
+            // Add specific listeners to all elements that should trigger navigation
+            document.querySelectorAll('[data-page]').forEach(element => {
+                element.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior
+                    const pageId = element.dataset.page;
+                    showPage(pageId);
+
+                    // If the click came from the mobile menu, close it
+                    if (element.classList.contains('nav-link-mobile')) {
                         mobileMenu.classList.add('hidden');
                         mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
                         lucide.createIcons();
                     }
-                }
-            });
-
-            // Back Buttons
-            document.querySelectorAll('.back-to-home-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showPage('home');
                 });
-            });
-            document.querySelector('.back-to-products-btn').addEventListener('click', (e) => {
-                e.preventDefault();
-                showPage('products');
             });
             
             // Cart Logic
