@@ -342,7 +342,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-           const firebaseConfig = {
+           
+            const firebaseConfig = {
   apiKey: "AIzaSyAKluQllyvfcH7j5UCOQFDDMaUBWOV9yW8",
   authDomain: "maarifa-store.firebaseapp.com",
   projectId: "maarifa-store",
@@ -351,6 +352,8 @@
   appId: "1:940520390427:web:1aaaea5c259bdd94de9dbe",
   measurementId: "G-QRLNHK0DXK"
 };
+           
+
             // Check for placeholder API Key
             if (firebaseConfig.apiKey === "YOUR_API_KEY") {
                 document.body.innerHTML = `<div class="h-screen w-screen bg-gray-900 flex items-center justify-center text-white text-center p-8" dir="rtl"><div><h1 class="text-3xl font-bold text-red-500 mb-4">خطأ في الإعدادات</h1><p class="text-xl mb-2">المتجر لا يعمل لأن مفتاح Firebase API غير صحيح.</p><p class="mt-4 text-gray-400">يرجى لصق مفاتيح <code class="bg-gray-700 p-1 rounded">firebaseConfig</code> الخاصة بك في ملف HTML.</p></div></div>`;
