@@ -341,7 +341,14 @@
     <!-- Your App's Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-           const firebaseConfig = {
+            
+            // =================================================================
+            // =================== تهيئة Firebase - خطوة هامة ===================
+            // =================================================================
+            //
+            // الصق كائن `firebaseConfig` الخاص بك هنا.
+            //
+            const firebaseConfig = {
   apiKey: "AIzaSyAKluQllyvfcH7j5UCOQFDDMaUBWOV9yW8",
   authDomain: "maarifa-store.firebaseapp.com",
   projectId: "maarifa-store",
@@ -350,6 +357,15 @@
   appId: "1:940520390427:web:1aaaea5c259bdd94de9dbe",
   measurementId: "G-QRLNHK0DXK"
 };
+            //
+            // =================================================================
+            // =================================================================
+
+            // Check for placeholder API Key
+            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+                document.body.innerHTML = `<div class="h-screen w-screen bg-gray-900 flex items-center justify-center text-white text-center p-8" dir="rtl"><div><h1 class="text-3xl font-bold text-red-500 mb-4">خطأ في الإعدادات</h1><p class="text-xl mb-2">المتجر لا يعمل لأن مفتاح Firebase API غير صحيح.</p><p class="mt-4 text-gray-400">يرجى لصق مفاتيح <code class="bg-gray-700 p-1 rounded">firebaseConfig</code> الخاصة بك في ملف HTML.</p></div></div>`;
+                return;
+            }
 
             // Initialize Firebase
             const app = firebase.initializeApp(firebaseConfig);
@@ -423,12 +439,13 @@
 
             // --- Firestore Data ---
             function renderStoreProducts() {
-                const productsCollectionPath = "products-demo"; 
+                // ** CORRECTED to use your 'products' collection **
+                const productsCollectionPath = "products"; 
                 db.collection(productsCollectionPath).onSnapshot(
                     (querySnapshot) => {
                         productsGrid.innerHTML = '';
                         if (querySnapshot.empty) {
-                            productsGrid.innerHTML = '<p class="col-span-full text-center text-lg">لا توجد منتجات لعرضها حالياً.</p>';
+                            productsGrid.innerHTML = '<p class="col-span-full text-center text-lg">لا توجد منتجات لعرضها حالياً. اذهب إلى قاعدة بيانات Firestore وأضف منتجات في مجموعة "products".</p>';
                             return;
                         }
                         querySnapshot.forEach((doc) => {
@@ -442,7 +459,7 @@
                     },
                     (error) => {
                         console.error("Error fetching products: ", error);
-                        productsGrid.innerHTML = `<p class="col-span-full text-center text-lg text-red-500">حدث خطأ أثناء تحميل المنتجات.</p>`;
+                        productsGrid.innerHTML = `<p class="col-span-full text-center text-lg text-red-500">حدث خطأ أثناء تحميل المنتجات. تأكد من صحة إعدادات Firebase وأن قواعد الأمان تسمح بالقراءة.</p>`;
                     }
                 );
             }
@@ -513,4 +530,3 @@
 
 </body>
 </html>
-
