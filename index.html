@@ -1,87 +1,168 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>متجر المعرفة للمنتجات الرقمية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر المعرفة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-        header { background: #003366; color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; }
-        header img { width: 40px; height: 40px; margin-left: 10px; }
-        nav { background: #0055a5; text-align: center; padding: 10px 0; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
-        .banner { width: 100%; height: 300px; background-image: url('https://i.imgur.com/z7oKRCt.jpg'); background-size: cover; background-position: center; }
-        .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-        .product { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; width: 220px; }
-        .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
-        .product h3 { margin: 10px 0; color: #0055a5; }
-        .product p { color: #666; font-size: 14px; }
-        .product span { display: block; margin: 10px 0; color: #ff9900; font-weight: bold; }
-        .product button { background: #ff9900; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-        .product button:hover { background: #e68a00; }
-        footer { background: #003366; color: white; text-align: center; padding: 15px; margin-top: 20px; }
-        footer a { color: #ffcc00; margin: 0 10px; text-decoration: none; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0c1427;
+            color: #e0e0e0;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(12, 20, 39, 0.8), rgba(12, 20, 39, 1)), url('https://placehold.co/1200x600/0a192f/e0e0e0?text=اكتشف+عالم+المعرفة');
+            background-size: cover;
+            background-position: center;
+        }
+        .card {
+            background-color: #1a2942;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(251, 191, 36, 0.1), 0 10px 10px -5px rgba(251, 191, 36, 0.04);
+        }
+        .btn-primary {
+            background-color: #fbbf24;
+            color: #1a2942;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #f59e0b;
+        }
+        .btn-secondary {
+             background-color: transparent;
+             color: #fbbf24;
+             border: 1px solid #fbbf24;
+             transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: #fbbf24;
+            color: #1a2942;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <img src="https://i.imgur.com/NKXK1gg.png" alt="شعار">
-        <h1>متجر المعرفة للمنتجات الرقمية</h1>
+
+    <!-- Header -->
+    <header class="bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white">
+                <span class="text-amber-400">متجر</span> المعرفة
+            </h1>
+            <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
+                <a href="#home" class="hover:text-amber-400 transition-colors">الرئيسية</a>
+                <a href="#products" class="hover:text-amber-400 transition-colors">المنتجات</a>
+                <a href="#about" class="hover:text-amber-400 transition-colors">حولنا</a>
+            </nav>
+            <div class="flex items-center">
+                <button class="ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white hover:text-amber-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </button>
+                 <button class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </header>
-    <nav>
-        <a href="index.html">الرئيسية</a>
-        <a href="#products">المنتجات</a>
-        <a href="about.html">من نحن</a>
-        <a href="contact.html">اتصل بنا</a>
-    </nav>
 
-    <div class="banner"></div>
-
-    <section id="products" class="products">
-        <div class="product">
-            <img src="https://i.imgur.com/V6FGf3w.jpg" alt="دليل الرشاقة">
-            <h3>دليل الرشاقة</h3>
-            <p>دليل شامل للتغذية الصحية والرياضة.</p>
-            <span>25 ريال</span>
-            <button>شراء الآن</button>
-        </div>
-        <div class="product">
-            <img src="https://i.imgur.com/c9oNsQ1.jpg" alt="التسويق الإلكتروني">
-            <h3>دليل التسويق الإلكتروني</h3>
-            <p>كل ما تحتاجه لتسويق منتجاتك بنجاح.</p>
-            <span>30 ريال</span>
-            <button>شراء الآن</button>
-        </div>
-        <div class="product">
-            <img src="https://i.imgur.com/HdnSGBV.jpg" alt="التجارة الرقمية">
-            <h3>استراتيجيات التجارة الرقمية</h3>
-            <p>طرق فعالة لزيادة أرباحك عبر الإنترنت.</p>
-            <span>40 ريال</span>
-            <button>شراء الآن</button>
-        </div>
-        <div class="product">
-            <img src="https://i.imgur.com/wuGSRpA.jpg" alt="حزمة التصاميم">
-            <h3>حزمة تصاميم التواصل</h3>
-            <p>تصاميم جاهزة احترافية لصفحاتك.</p>
-            <span>20 ريال</span>
-            <button>شراء الآن</button>
-        </div>
-        <div class="product">
-            <img src="https://i.imgur.com/YiydD1z.jpg" alt="كورس SEO">
-            <h3>كورس تحسين محركات البحث</h3>
-            <p>تعلم تصدر نتائج البحث بسهولة.</p>
-            <span>50 ريال</span>
-            <button>شراء الآن</button>
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white">
+        <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">بوابتك إلى عالم من الإلهام</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">منتجات فريدة تشعل فضولك وتضيء أفكارك.</p>
+            <a href="#products" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg">تصفح المنتجات</a>
         </div>
     </section>
 
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2025</p>
-        <a href="#"><i class="fab fa-facebook"></i> فيسبوك</a>
-        <a href="#"><i class="fab fa-twitter"></i> تويتر</a>
-        <a href="#"><i class="fab fa-instagram"></i> انستقرام</a>
+    <!-- Products Section -->
+    <section id="products" class="py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center mb-12">منتجاتنا المميزة</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Product 1: Tree of Knowledge Poster -->
+                <div class="card rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://placehold.co/600x400/1a2942/fbbf24?text=ملصق+شجرة+المعرفة" alt="ملصق فني لشجرة المعرفة" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2">ملصق شجرة المعرفة</h4>
+                        <p class="mb-4">تصميم فني يجسد نمو الحكمة من جذور المعرفة. مثالي لمكتبك أو مساحة إلهامك.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-amber-400">99 ر.س</span>
+                            <button class="btn-secondary font-bold py-2 px-4 rounded-lg">أضف للسلة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Digital Mind Book -->
+                <div class="card rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://placehold.co/600x400/1a2942/fbbf24?text=كتاب+العقل+الرقمي" alt="غلاف كتاب العقل الرقمي" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2">كتاب: رحلة العقل الرقمي</h4>
+                        <p class="mb-4">استكشف مستقبل الوعي والذكاء في عصر التكنولوجيا من خلال هذا الكتاب المثير للتفكير.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-amber-400">75 ر.س</span>
+                            <button class="btn-secondary font-bold py-2 px-4 rounded-lg">أضف للسلة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Achievement Planner -->
+                <div class="card rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://placehold.co/600x400/1a2942/fbbf24?text=مخطط+الإنجاز" alt="مخطط إنجاز فكري" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2">مخطط الإنجاز الفكري</h4>
+                        <p class="mb-4">نظم أهدافك التعليمية وارتقِ بمسيرتك المعرفية. تصميم يساعدك على تتبع تقدمك.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-amber-400">120 ر.س</span>
+                            <button class="btn-secondary font-bold py-2 px-4 rounded-lg">أضف للسلة</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-gray-900/30">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-6">عن متجر المعرفة</h3>
+            <p class="text-xl max-w-4xl mx-auto leading-relaxed">
+                نؤمن في "متجر المعرفة" بأن الفضول هو شرارة الإبداع. كل منتج في متجرنا مصمم ليكون أكثر من مجرد غرض، بل هو أداة لإثارة التساؤل، وتشجيع التعلم، والاحتفاء برحلة الاكتشاف الفكري. من الفن الذي يجسد الحكمة إلى الأدوات التي تنظم أفكارك، نحن هنا لنرافقك في مسيرتك نحو الارتقاء.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold"><span class="text-amber-400">متجر</span> المعرفة</h2>
+                    <p class="text-gray-400">أدواتك للإلهام والنمو.</p>
+                </div>
+                <div class="flex space-x-4 space-x-reverse">
+                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm-1.161 1.043c-1.022.048-1.637.21-2.148.41a3.896 3.896 0 00-1.398.922 3.896 3.896 0 00-.922 1.398c-.2.511-.362 1.126-.41 2.148-.046 1.024-.06 1.348-.06 3.731s.014 2.707.06 3.731c.048 1.022.21 1.637.41 2.148.21.533.504 1.012.922 1.398.418.389.865.683 1.398.922.511.2.97.362 2.148.41 1.024.046 1.348.06 3.731.06s2.707-.014 3.731-.06c1.022-.048 1.637-.21 2.148-.41.533-.21.98-.504 1.398-.922.389-.418.683-.865.922-1.398.2-.511.362-1.126.41-2.148.046-1.024.06-1.348.06-3.731s-.014-2.707-.06-3.731c-.048-1.022-.21-1.637-.41-2.148a3.896 3.896 0 00-.922-1.398 3.896 3.896 0 00-1.398-.922c-.511-.2-.97-.362-2.148-.41-1.024-.046-1.348-.06-3.731-.06s-2.707.014-3.731.06zM12 8.118c-2.147 0-3.882 1.735-3.882 3.882s1.735 3.882 3.882 3.882 3.882-1.735 3.882-3.882-1.735-3.882-3.882-3.882zm0 6.726c-1.573 0-2.844-1.271-2.844-2.844s1.271-2.844 2.844-2.844 2.844 1.271 2.844 2.844-1.271 2.844-2.844 2.844zM16.802 8.249a1.232 1.232 0 110-2.464 1.232 1.232 0 010 2.464z" clip-rule="evenodd" /></svg></a>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 متجر المعرفة. كل الحقوق محفوظة.</p>
+            </div>
+        </div>
     </footer>
+
+
 </body>
 </html>
